@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon>phNugetIcon.ico</ApplicationIcon>
+
+    <PackageId>PH.Log4NetExtensions</PackageId>
+
+
+    <Description>
+      Tiny Time expression:
+
+      this is a simple c# struct for exress  time value to avoid use of TimeStamp.
+
+    </Description>
+
+    <PackageReleaseNotes>
+      Fix on first release: correct next.
+      New Implementations: add Previous method
+    </PackageReleaseNotes>
+
+
+    <PackageTags>Time</PackageTags>
+
+    <PackageVersion>0.0.1</PackageVersion>
+    <Authors>Paolo Innocenti</Authors>
+    <Copyright>Copyright PH 2020 (c) paonath@gmail.com. All rights reserved.</Copyright>
+    <RepositoryUrl>https://github.com/paonath/PH.Log4NetExtensions</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/paonath/PH.Log4NetExtensions</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/paonath/Icons/master/nuget_es_img.png</PackageIconUrl>
+
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="nuget_es_img.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PackageIcon>nuget_es_img.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="[2.0.8,)"  />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <SourceRevisionId>build-$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <SourceRevisionId>rel-$([System.DateTime]::UtcNow.ToString("yyyyMMdd"))</SourceRevisionId>
+  </PropertyGroup>
+
+</Project>
