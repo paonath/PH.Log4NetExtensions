@@ -1,4 +1,4 @@
-# PH.Log4NetExtensions
+# PH.Log4NetExtensions [![NuGet Badge](https://buildstats.info/nuget/PH.Log4NetExtensions)](https://www.nuget.org/packages/PH.Log4NetExtensions/)
 
 Extensions for log4net
 
