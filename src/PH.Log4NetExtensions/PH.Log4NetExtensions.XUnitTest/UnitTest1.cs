@@ -41,7 +41,7 @@ namespace PH.Log4NetExtensions.XUnitTest
             }
 
             var lines = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
-            contains = lines?.LastOrDefault()?.Contains(" TRACE ") ?? false;
+            contains = lines?.LastOrDefault(s => s.StartsWith($"{DateTime.Now.Year}", StringComparison.InvariantCultureIgnoreCase) )?.Contains(" TRACE ") ?? false;
 
 
             Assert.True(contains);
