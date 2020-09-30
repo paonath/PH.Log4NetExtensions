@@ -8,21 +8,20 @@
 
 
     <Description>
-      Tiny Time expression:
+      Log4net extensions methods.
 
-      this is a simple c# struct for exress  time value to avoid use of TimeStamp.
-
+      Add Trace quickmethod. 
+      Add Scope and TraceScope.
     </Description>
 
     <PackageReleaseNotes>
-      Fix on first release: correct next.
-      New Implementations: add Previous method
+      Fix info in nuget package, add TraceLogScope
     </PackageReleaseNotes>
 
 
-    <PackageTags>Time</PackageTags>
+    <PackageTags>log4net, trace, NDC</PackageTags>
 
-    <PackageVersion>0.0.1</PackageVersion>
+    <PackageVersion>0.0.2</PackageVersion>
     <Authors>Paolo Innocenti</Authors>
     <Copyright>Copyright PH 2020 (c) paonath@gmail.com. All rights reserved.</Copyright>
     <RepositoryUrl>https://github.com/paonath/PH.Log4NetExtensions</RepositoryUrl>
