@@ -38,6 +38,19 @@ namespace PH.Log4NetExtensions
         public static void Trace([NotNull] this ILog log, string message) => Trace(log, message, null);
 
 
+        /// <summary>Gets a NDC scope.</summary>
+        /// <param name="log">The log.</param>
+        /// <param name="scopeName">Name of the scope.</param>
+        /// <returns><see cref="IDisposable"/> scope</returns>
+        public static IDisposable GetNdcScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+            InitTraceLogScope(log, scopeName);
+           
 
+        /// <summary>Initializes the <see cref="TraceLogScope">trace log scope</see> .</summary>
+        /// <param name="log">The log.</param>
+        /// <param name="scopeName">Name of the scope.</param>
+        /// <returns><see cref="IDisposable"/> scope</returns>
+        public static TraceLogScope InitTraceLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+            TraceLogScope.Init(log, scopeName);
     }
 }

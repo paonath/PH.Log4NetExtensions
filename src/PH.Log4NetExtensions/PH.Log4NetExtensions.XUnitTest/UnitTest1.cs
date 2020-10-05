@@ -41,7 +41,7 @@ namespace PH.Log4NetExtensions.XUnitTest
             }
 
             var lines = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
-            contains = lines?.LastOrDefault()?.Contains(" TRACE ") ?? false;
+            contains = lines?.LastOrDefault(s => s.StartsWith($"{DateTime.Now.Year}", StringComparison.InvariantCultureIgnoreCase) )?.Contains(" TRACE ") ?? false;
 
 
             Assert.True(contains);
@@ -73,6 +73,41 @@ namespace PH.Log4NetExtensions.XUnitTest
             var lines  = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
             var scoped = lines[lines.Length - 2];
             contains = scoped?.Contains("[NDC:testing my scope]") ?? false;
+            var noContains = lines.LastOrDefault()?.Contains("[NDC:(null)]") ?? false;
+
+            Assert.True(contains);
+            Assert.True(noContains);
+        }
+
+        [Fact]
+        public void TestTraceScope()
+        {
+            
+
+
+            var log = GetLogger();
+            log.Debug("with no scope");
+            using (log.InitTraceLogScope("TRScope"))
+            {
+                log.Trace("a message with scope");
+            }
+            log.Debug("with no scope2");
+
+            var contains = false;
+            var txt      = "";
+            using (FileStream stream = File.Open(@"./logs/testing.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    txt = reader.ReadToEnd();
+                    
+                }
+            }
+
+
+            var lines  = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
+            var scoped = lines[lines.Length - 2];
+            contains = scoped?.Contains("[NDC:TRScope]") ?? false;
             var noContains = lines.LastOrDefault()?.Contains("[NDC:(null)]") ?? false;
 
             Assert.True(contains);

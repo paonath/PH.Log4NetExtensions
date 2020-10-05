@@ -1,4 +1,4 @@
-# PH.Log4NetExtensions
+# PH.Log4NetExtensions [![NuGet Badge](https://buildstats.info/nuget/PH.Log4NetExtensions)](https://www.nuget.org/packages/PH.Log4NetExtensions/)
 
 Extensions for log4net
 
@@ -33,3 +33,28 @@ using (LogScope.Init("testing my scope"))
 log.Debug("with no scope2");
 
 ```
+
+Push a TRACE scope in log4net NDC
+
+```csharp
+
+//write debug message with no NDC property
+log.Debug("with no scope");
+
+using (log.InitTraceLogScope("TRScope"))
+{
+    //write a trace with NDC property set to "TRScope" and a message set to "----> TRScope"
+
+    //do code...
+
+    //write a trace with NDC property set to "TRScope"
+    log.Trace("a message with scope");
+
+    //on disposing write a trace with NDC property set to "TRScope" and a message set to "<---- TRScope"
+}
+
+log.Debug("with no scope2");
+
+```
+
+
