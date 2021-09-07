@@ -15,13 +15,13 @@
     </Description>
 
     <PackageReleaseNotes>
-      Fix info in nuget package, add TraceLogScope
+      DebugLogScope, InfoLogScope, ErrorLogScope and FatalLogScope
     </PackageReleaseNotes>
 
 
     <PackageTags>log4net, trace, NDC</PackageTags>
 
-    <PackageVersion>0.0.2</PackageVersion>
+    <PackageVersion>0.0.3</PackageVersion>
     <Authors>Paolo Innocenti</Authors>
     <Copyright>Copyright PH 2020 (c) paonath@gmail.com. All rights reserved.</Copyright>
     <RepositoryUrl>https://github.com/paonath/PH.Log4NetExtensions</RepositoryUrl>

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using log4net;
 
 namespace PH.Log4NetExtensions
 {
@@ -14,7 +14,14 @@ namespace PH.Log4NetExtensions
         /// <param name="scopeName">Name of the scope.</param>
         /// <returns><see cref="IDisposable"/> scope</returns>
         [NotNull]
-        public static LogScope Init([NotNull] string scopeName) => new LogScope(message: scopeName);
+        public static LogScope Init([CanBeNull] string scopeName = "", [CallerMemberName] string callMemberName = "")
+        {
+            if (string.IsNullOrEmpty(scopeName))
+            {
+                scopeName = callMemberName;
+            }
+            return new LogScope(message: scopeName);
+        }
 
 
         private readonly IDisposable _ndc;
@@ -38,36 +45,6 @@ namespace PH.Log4NetExtensions
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-    }
-
-    /// <summary>
-    /// A NDC Log Scope thath writes Begin and end on Trace appender
-    /// </summary>
-    /// <seealso cref="PH.Log4NetExtensions.LogScope" />
-    /// <seealso cref="System.IDisposable" />
-    public class TraceLogScope : LogScope, IDisposable
-    {
-        private readonly string _m;
-        private readonly ILog _log;
-        public TraceLogScope([NotNull] ILog log,[NotNull] string message):base(message)
-        {
-            _m   = message;
-            _log = log;
-            _log?.Trace($"----> {_m}");
-        }
-
-        /// <summary>Initializes the specified scope with name and Trace begin and End on logger.</summary>
-        /// <param name="log">The loger.</param>
-        /// <param name="scopeName">Name of the scope.</param>
-        /// <returns><see cref="IDisposable"/> scope</returns>
-        [NotNull]
-        public static TraceLogScope Init([NotNull] ILog log,[NotNull] string scopeName) => new TraceLogScope(log,message: scopeName);
-
-        protected override void Dispose(bool disposing)
-        {
-            _log?.Trace($"<---- {_m}");
-            base.Dispose(disposing);
         }
     }
 }

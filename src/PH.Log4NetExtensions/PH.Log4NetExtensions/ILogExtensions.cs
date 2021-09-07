@@ -52,5 +52,43 @@ namespace PH.Log4NetExtensions
         /// <returns><see cref="IDisposable"/> scope</returns>
         public static TraceLogScope InitTraceLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
             TraceLogScope.Init(log, scopeName);
+
+        /// <summary>Initializes the <see cref="DebugLogScope">debug log scope</see>.</summary>
+        /// <param name="log">The log.</param>
+        /// <param name="scopeName">Name of the scope.</param>
+        /// <returns></returns>
+        public static DebugLogScope InitDebugLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+            DebugLogScope.Init(log, scopeName);
+
+        ///// <summary>Initializes the <see cref="InfoLogScope">info log scope</see>.</summary>
+        ///// <param name="log">The log.</param>
+        ///// <param name="scopeName">Name of the scope.</param>
+        ///// <returns></returns>
+        //public static InfoLogScope InitInfoLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+        //    InfoLogScope.Init(log, scopeName);
+
+        ///// <summary>Initializes the <see cref="WarnLogScope">warn log scope</see>.</summary>
+        ///// <param name="log">The log.</param>
+        ///// <param name="scopeName">Name of the scope.</param>
+        ///// <returns></returns>
+        //public static WarnLogScope InitWarnLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+        //    WarnLogScope.Init(log, scopeName);
+
+        ///// <summary>Initializes the <see cref="ErrorLogScope">error log scope</see>.</summary>
+        ///// <param name="log">The log.</param>
+        ///// <param name="scopeName">Name of the scope.</param>
+        ///// <returns></returns>
+        //public static ErrorLogScope InitErrorLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+        //    ErrorLogScope.Init(log, scopeName);
+
+        ///// <summary>Initializes the <see cref="FatalLogScope">fatal log scope</see>.</summary>
+        ///// <param name="log">The log.</param>
+        ///// <param name="scopeName">Name of the scope.</param>
+        ///// <returns></returns>
+        //public static FatalLogScope InitFatalLogScope([NotNull] this ILog log, [NotNull] string scopeName) =>
+        //    FatalLogScope.Init(log, scopeName);
+
+
+
     }
 }

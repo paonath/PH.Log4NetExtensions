@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using log4net;
+using log4net.Core;
 using Xunit;
 
 namespace PH.Log4NetExtensions.XUnitTest
@@ -51,6 +52,13 @@ namespace PH.Log4NetExtensions.XUnitTest
         public void TestScope()
         {
             var log = GetLogger();
+
+            using (var scope1 = LogScope.Init())
+            {
+                log.Trace("this must be in scope called 'TestScope'");
+            }
+
+
             log.Debug("with no scope");
             using (LogScope.Init("testing my scope"))
             {
@@ -108,6 +116,44 @@ namespace PH.Log4NetExtensions.XUnitTest
             var lines  = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
             var scoped = lines[lines.Length - 2];
             contains = scoped?.Contains("[NDC:TRScope]") ?? false;
+            var noContains = lines.LastOrDefault()?.Contains("[NDC:(null)]") ?? false;
+
+            Assert.True(contains);
+            Assert.True(noContains);
+        }
+
+        [Fact]
+        public void TestDebugScope()
+        {
+            
+
+
+            var log = GetLogger();
+
+            //log.Logger.Log(typeof(UnitTest1).DeclaringType, Level.Emergency, $"what is emergency?", null);
+
+            log.Debug("with no scope");
+            using (log.InitDebugLogScope("DBGScope"))
+            {
+                log.Trace("a message with scope");
+            }
+            log.Debug("with no scope2");
+
+            var contains = false;
+            var txt      = "";
+            using (FileStream stream = File.Open(@"./logs/testing.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    txt = reader.ReadToEnd();
+                    
+                }
+            }
+
+
+            var lines  = txt.Split(new string[] {Environment.NewLine} , StringSplitOptions.RemoveEmptyEntries );
+            var scoped = lines[lines.Length - 2];
+            contains = scoped?.Contains("[NDC:DBGScope]") ?? false;
             var noContains = lines.LastOrDefault()?.Contains("[NDC:(null)]") ?? false;
 
             Assert.True(contains);
